@@ -14,8 +14,8 @@ function App() {
    
       <Router>
         <Routes>
-          {/* <Route path='/' element={<Home />} /> */}
-          <Route path='post/:postId' element={<Post />} /> 
+          <Route path='/' element={<Home />} />
+          <Route path=':postId' element={<Post />} /> 
           <Route path='posts' element={<Posts />} />
           <Route path='new' element={<NewPost />} /> 
             

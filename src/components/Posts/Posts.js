@@ -1,25 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { Card, Container, Row, Col, Button, Badge, Spinner, Image } from 'react-bootstrap';
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { Outlet } from "react-router-dom"
+import { Card, Container, Row, Col, Button, Spinner } from 'react-bootstrap';
+import { Link, useNavigate } from "react-router-dom";
 import { apiUrl } from '../../util/api';
-import { TfiAlarmClock } from 'react-icons/tfi';
-import { BsArrowRight, BsEmojiSmile } from "react-icons/bs";
-import { AiOutlineLike, AiOutlinePlus } from "react-icons/ai";
+import { BsArrowRight } from "react-icons/bs";
+import { AiOutlinePlus } from "react-icons/ai";
+import { RiChatHeartFill } from "react-icons/ri";
 
+const Posts = (postId) => {
 
-const Posts = () => {
     const navigate = useNavigate()
     const [posts, setPosts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [Error, setError] = useState('');
-
-    const getFormattedDate = (dateStr) => {
-        const date = new Date(dateStr);
-        return date.toLocaleString();
-    }
-
-   
 
     const getAllPosts = async () => {
 
@@ -47,14 +39,14 @@ const Posts = () => {
 
     useEffect(() => {
         getAllPosts();
-    }, []);
+    });
 
     return (
-        
+
         <Container>
             <div className="jumbotron">
-                <h1>PAGE FOR DOG LOVERS</h1>
-                <h4 className="text-light">... and one cat <BsEmojiSmile /></h4>
+                <h1>PAGE FOR POST LOVERS</h1>
+                <p className="text-light" style={{fontSize: '50px'}}><RiChatHeartFill /></p>
             </div>
             {isLoading && !Error && <h4><Spinner animation="border" variant="primary" /></h4>}
             {!Error && isLoading && <h4>{Error}</h4>}
@@ -63,30 +55,21 @@ const Posts = () => {
                     <Button variant="primary" className="btn-block w-100 mt-5 mb-5" onClick={() => navigate("/new")}>Create new post <AiOutlinePlus /></Button>
                 </Col>
             </Row>
-              <Row>
-                                {posts
-                    // .sort((a, b) => (a.publishDate > b.publishDate ? 1 : -1))
-                    .map((post, id) => (
-                        <Col key={id}>
-                            <Card className="card-div">
-                                {/* <div className=""> */}
-                                    {/* <Image src={post.owner.picture} roundedCircle /> {post.owner.firstName} {post.owner.lastName}</div> */}
-                                {/* <div className="card-img" style={{ backgroundImage: `url(${(post.image)})` }}><h3 className="card-badge"><Badge bg="secondary"><AiOutlineLike />{post.likes}</Badge></h3></div> */}
-                                {/* <Card.Img variant="top" src={post.image} /> */}
-                                <Card.Body>
-                                    <Card.Title>{post.title}</Card.Title>
-                                    <Card.Text>
-                                        {/* <TfiAlarmClock /><span>{getFormattedDate(post.publishDate)}</span><br /> */}
-                                        <div className="card-text">{post.body}</div>
-                                        {/* {post.tags.map((tag, index) => (<div key={index} className="card-tags">{tag}</div>))} */}
-                                    </Card.Text>
-                                    {/* <Link to={}> */}
-                                        <Button variant="primary" className="card-btn">View more details <BsArrowRight /></Button>
-                                    {/* </Link> */}
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    ))}
+            <Row>
+                {posts.map((post, id) => (
+                    <Col key={id}>
+                        <Card>
+                            <Card.Body>
+                                <Card.Title>{post.title}</Card.Title>
+                                <hr />
+                                <Card.Text>{post.body}</Card.Text>
+                                <Link to={`post/${post.id}`}>
+                                    <Button variant="primary" className="card-btn-view">View more details <BsArrowRight /></Button>
+                                </Link>
+                            </Card.Body>
+                        </Card>
+                    </Col>
+                ))}
                 <p className="text-center text-light text-xs mt-6">
                     &copy;2023 Cuk Danijela | All rights reserved.
                 </p>
