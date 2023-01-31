@@ -1,8 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
 import './index.css';
-import App from './App';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import App from "./App"
+import Posts from "./components/Posts/Posts";
+import Post from "./components/Post/Post";
+import ErrorPage from "./components/error-page";
 import reportWebVitals from './reportWebVitals';
+
+
+// const router = createBrowserRouter([
+//   {
+//     path: "/",
+//     element: <App />,
+//     errorElement: <ErrorPage />,
+//   children: [
+//     {
+//       path: "posts/:postId",
+//       element: <Post />,
+//     },
+//   ],
+//   },
+// ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
