@@ -9,6 +9,7 @@ export default function NewPost() {
 
     let navigate = useNavigate()
     const [value, setValue] = React.useState();
+    const [message, setMessage] = React.useState();
     const [formInputData, setformInputData] = useState(
         {
             userId: '',

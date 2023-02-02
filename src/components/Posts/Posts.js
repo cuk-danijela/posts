@@ -27,9 +27,8 @@ const Posts = (postId) => {
             const data = await res.json();
             setPosts(data);
             setIsLoading(false);
-            console.log(data);
+            // console.log(data);
         }
-
         catch (error) {
             setIsLoading(false);
             setError(error.message);
@@ -46,7 +45,7 @@ const Posts = (postId) => {
         <Container>
             <div className="jumbotron">
                 <h1>PAGE FOR POST LOVERS</h1>
-                <p className="text-light" style={{fontSize: '50px'}}><RiChatHeartFill /></p>
+                <p className="text-light" style={{ fontSize: '50px' }}><RiChatHeartFill /></p>
             </div>
             {isLoading && !Error && <h4><Spinner animation="border" variant="primary" /></h4>}
             {!Error && isLoading && <h4>{Error}</h4>}
@@ -63,9 +62,7 @@ const Posts = (postId) => {
                                 <Card.Title>{post.title}</Card.Title>
                                 <hr />
                                 <Card.Text>{post.body}</Card.Text>
-                                <Link to={`post/${post.id}`}>
-                                    <Button variant="primary" className="card-btn-view">View more details <BsArrowRight /></Button>
-                                </Link>
+                                    <Button variant="primary" className="card-btn-view" onClick={() => navigate(`posts/${post.id}`)}>View more details <BsArrowRight /></Button>
                             </Card.Body>
                         </Card>
                     </Col>
